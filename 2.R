@@ -15,3 +15,11 @@ repeat {
   fib <- append(fib,f_n)
 }
 sum(fib[fib%%2 == 0])
+
+
+# There are a lot of ways outside to calculate fibonacci series
+# The standard recursive definition is too slow without caching/memoization,
+# that isn't built in by default to R.
+# I think my solution is pretty much a 1:1 translation of the problem text,
+# but not the most efficient.
+# That would be a direct access to the array, but this hides what we do behind how we do it.

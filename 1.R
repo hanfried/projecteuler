@@ -5,3 +5,17 @@
 
 nr <- 1:999
 sum( which(nr %% 3 == 0 | nr %% 5 == 0) )
+
+
+# Very straight forward to a reader
+
+# Disadvantage: It relies that R indices vectors starting from 1,
+# so nr[1] == 1, nr[2] == 2, ... here in this case
+# without it, 
+# The alternative would be to sum about the values:
+# sum( nr[nr %% 3 == 0 | nr %% 5 == 0] )
+# what is even shorter, but IMO harder to read and 3 times repeating nr
+
+# I personal hate this repetition,
+# I'd love to write it as (pseudocode):
+# sum( nr: . %% 3 == 0 | . %% 5 == 0 )

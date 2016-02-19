@@ -4,3 +4,7 @@
 
 library(numbers)
 max(primeFactors(600851475143))
+
+# There is nothing wrong using libraries,
+# here we see it is both efficient and completely obviously to anyone who can read.
+# No need to program a Sieb of Erasthostenos or w/e.
