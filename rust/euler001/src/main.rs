@@ -5,13 +5,18 @@
  */
 
 extern crate clap;
+extern crate regex;
 use clap::App;
+use regex::Regex;
 
-fn sum_of_multiples(n: u64) -> u64 {
+fn sum_of_multiples(n: u64, multiples: &Vec<u64>) -> u64 {
     let mut sum = 0;
     for i in 0..n {
-        if i % 3 == 0 || i % 5 == 0 {
-            sum += i;
+        'multiples: for m in multiples {
+            if i % m == 0 {
+                sum += i;
+                break 'multiples;
+            }
         }
     }
     sum
@@ -20,7 +25,8 @@ fn sum_of_multiples(n: u64) -> u64 {
 fn main() {
     let matches = App::new("projecteuler-rust-001")
         .args_from_usage(
-            "-n=[N]"
+            "-n=[N]                      'defaults to 1000
+             -m, --multiples=[MULTIPLES] 'defaults to 3,5"
         )
         .get_matches();
     let n = matches.value_of("n")
@@ -28,9 +34,16 @@ fn main() {
         .to_string()
         .parse::<f64>()
         .unwrap() as u64;
+    let non_digit_re = Regex::new(r"\D+").unwrap();
+    let multiples = matches.value_of("multiples").unwrap_or("3,5");
+    let multiples: Vec<u64> = non_digit_re
+        .split(multiples)
+        .map(|s| s.parse::<u64>().unwrap())
+        .collect();
     println!(
-        "Sum of all multiples of 3 and 5 till n={} is {}",
+        "Sum of all multiples of {:?} till n={} is {}",
+        multiples,
         n,
-        sum_of_multiples(n)
+        sum_of_multiples(n, &multiples)
     );
 }
