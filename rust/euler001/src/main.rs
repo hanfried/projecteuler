@@ -7,6 +7,16 @@
 extern crate clap;
 use clap::App;
 
+fn sum_of_multiples(n: u64) -> u64 {
+    let mut sum = 0;
+    for i in 0..n {
+        if i % 3 == 0 || i % 5 == 0 {
+            sum += i;
+        }
+    }
+    sum
+}
+
 fn main() {
     let matches = App::new("projecteuler-rust-001")
         .args_from_usage(
@@ -18,13 +28,9 @@ fn main() {
         .to_string()
         .parse::<f64>()
         .unwrap() as u64;
-    let mut s = 0;
-    for n in 0..n {
-        if n % 3 == 0 || n % 5 == 0 {
-            s += n;
-        }
-    }
     println!(
-        "Sum of all multiples of 3 and 5 till n={} is {}", n, s
+        "Sum of all multiples of 3 and 5 till n={} is {}",
+        n,
+        sum_of_multiples(n)
     );
 }
