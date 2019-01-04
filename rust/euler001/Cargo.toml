@@ -1,0 +1,8 @@
+[package]
+name = "euler001"
+version = "0.1.0"
+authors = ["Janek Schleicher <postkasten@janek-schleicher.de>"]
+edition = "2018"
+
+[dependencies]
+clap = "~2.27.0"
